@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.mockito.Mockito;
 
 @RunWith(Parameterized.class)
 public class FelineTest {
@@ -27,9 +28,12 @@ public class FelineTest {
     }
 
     @Test
-    public void testGetKittens() {
-        assertEquals(1, feline.getKittens());
+    public void testGetKittensWithoutParameter() {
+        Feline felineSpy = spy(feline);
+        felineSpy.getKittens();
+        Mockito.verify(felineSpy, Mockito.times(1)).getKittens(1);
     }
+
 
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
