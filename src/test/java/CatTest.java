@@ -7,15 +7,20 @@ import java.util.List;
 import com.example.*;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.Spy;
+import org.mockito.junit.MockitoJUnitRunner;
 
+@RunWith(MockitoJUnitRunner.class)
 public class CatTest {
 
     private Cat cat;
-    private Feline felineMock;
-
+    @Mock
+    Feline felineMock;
     @Before
-    public void setUp() throws Exception {
-        felineMock = mock(Feline.class);
+    public void setUp(){
         cat = new Cat(felineMock);
     }
 
@@ -26,11 +31,9 @@ public class CatTest {
 
     @Test
     public void testGetFood() throws Exception {
-        List<String> expectedFood = Arrays.asList("мясо");
+        List<String> expectedFood = Arrays.asList("Животные", "Птицы", "Рыба");
         when(felineMock.eatMeat()).thenReturn(expectedFood);
-
         List<String> actualFood = cat.getFood();
-
         assertEquals(expectedFood, actualFood);
     }
 
