@@ -35,12 +35,32 @@ public class LionTest {
                 {"Самка", false}
         });
     }
+    @Test
+    public void testInvalidSex() {
+        try {
+            new Lion("Invalid", felineMock);
+        } catch (Exception e) {
+            assertEquals("Используйте допустимые значения пола животного - самей или самка", e.getMessage());
+        }
+    }
+    @Test
+    public void testSetFeline() {
+        try {
+            lion = new Lion(sex, felineMock);
+            lion.setFeline(felineMock);
+            verify(lion).setFeline(felineMock);
+        } catch (Exception e) {
+            fail("Unexpected exception: " + e.getMessage());
+        }
+    }
+
 
     @Test
     public void testDoesHaveMane() throws Exception {
         lion = new Lion(sex, felineMock);
         assertEquals(expectedHasMane, lion.doesHaveMane());
     }
+
 
     @Test
     public void testGetKittens() {
@@ -55,8 +75,8 @@ public class LionTest {
 
     @Test
     public void testGetFood() throws Exception {
-        when(felineMock.getFood("Хищник")).thenReturn(Arrays.asList("мясо", "рыба"));
+        when(felineMock.getFood("Хищник")).thenReturn(Arrays.asList("Животные", "Птицы", "Рыба"));
         lion = new Lion(sex, felineMock);
-        assertEquals(Arrays.asList("мясо", "рыба"), lion.getFood());
+        assertEquals(Arrays.asList("Животные", "Птицы", "Рыба"), lion.getFood());
     }
 }

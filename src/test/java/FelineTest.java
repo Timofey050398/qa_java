@@ -60,7 +60,7 @@ public class FelineTest {
     @Test
     public void testEatMeat() throws Exception {
         Feline felineSpy = spy(feline);
-        List<String> expectedFood = Arrays.asList("мясо");
+        List<String> expectedFood = Arrays.asList("Животные", "Птицы", "Рыба");
         when(felineSpy.getFood("Хищник")).thenReturn(expectedFood);
 
         List<String> actualFood = felineSpy.eatMeat();
