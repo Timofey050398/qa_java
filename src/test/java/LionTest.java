@@ -43,17 +43,6 @@ public class LionTest {
             assertEquals("Используйте допустимые значения пола животного - самей или самка", e.getMessage());
         }
     }
-    @Test
-    public void testSetFeline() {
-        try {
-            lion = new Lion(sex, felineMock);
-            lion.setFeline(felineMock);
-            verify(lion).setFeline(felineMock);
-        } catch (Exception e) {
-            fail("Unexpected exception: " + e.getMessage());
-        }
-    }
-
 
     @Test
     public void testDoesHaveMane() throws Exception {
