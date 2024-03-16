@@ -54,9 +54,9 @@ public class LionTest {
     @Test
     public void testGetKittens() {
         try {
-            when(felineMock.getKittens()).thenReturn(3);
+            when(felineMock.getKittens()).thenReturn(1);
             lion = new Lion(sex, felineMock);
-            assertEquals(3, lion.getKittens());
+            assertEquals(1, lion.getKittens());
         } catch (Exception e) {
             fail("Unexpected exception: " + e.getMessage());
         }
