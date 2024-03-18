@@ -1,70 +1,40 @@
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
-
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
-
 import com.example.Feline;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 import org.mockito.Mockito;
+import org.mockito.Spy;
+import org.mockito.junit.MockitoJUnitRunner;
 
-@RunWith(Parameterized.class)
+@RunWith(MockitoJUnitRunner.class)
 public class FelineTest {
 
     private Feline feline;
 
-    @Before
-    public void setUp() throws Exception {
-        feline = new Feline();
-    }
+    @Spy
+    Feline felineSpy;
 
     @Test
     public void testGetFamily() {
+        feline = new Feline();
         assertEquals("Кошачьи", feline.getFamily());
     }
 
     @Test
     public void testGetKittensWithoutParameter() {
-        Feline felineSpy = spy(feline);
         felineSpy.getKittens();
         Mockito.verify(felineSpy, Mockito.times(1)).getKittens(1);
     }
 
 
-    @Parameterized.Parameters
-    public static Collection<Object[]> data() {
-        return Arrays.asList(new Object[][] {
-                {1, 1},
-                {2, 2},
-                {5, 5}
-        });
-    }
-
-    private int inputKittensCount;
-    private int expectedKittensCount;
-
-    public FelineTest(int inputKittensCount, int expectedKittensCount) {
-        this.inputKittensCount = inputKittensCount;
-        this.expectedKittensCount = expectedKittensCount;
-    }
-
-    @Test
-    public void testGetKittensWithParameter() {
-        assertEquals(expectedKittensCount, feline.getKittens(inputKittensCount));
-    }
-
     @Test
     public void testEatMeat() throws Exception {
-        Feline felineSpy = spy(feline);
         List<String> expectedFood = Arrays.asList("Животные", "Птицы", "Рыба");
         when(felineSpy.getFood("Хищник")).thenReturn(expectedFood);
-
         List<String> actualFood = felineSpy.eatMeat();
-
         assertEquals(expectedFood, actualFood);
     }
 }
