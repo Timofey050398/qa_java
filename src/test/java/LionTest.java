@@ -2,6 +2,7 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 import com.example.*;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,8 +40,9 @@ public class LionTest {
 
     @Test
     public void testGetFood() throws Exception {
-        when(felineMock.getFood("Хищник")).thenReturn(Arrays.asList("Животные", "Птицы", "Рыба"));
+        List<String> expectedFood = Arrays.asList("Животные", "Птицы", "Рыба");
+        when(felineMock.getFood("Хищник")).thenReturn(expectedFood);
         lion = new Lion("Самка", felineMock);
-        assertEquals(Arrays.asList("Животные", "Птицы", "Рыба"), lion.getFood());
+        assertEquals(expectedFood, lion.getFood());
     }
 }
